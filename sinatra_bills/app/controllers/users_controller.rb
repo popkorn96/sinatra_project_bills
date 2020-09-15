@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-
+  configure do
+    enable :sessions
+    set :session_secret, "secret"
+  end
   # GET: /users
   get "/users" do
     erb :"/users/index.html"
