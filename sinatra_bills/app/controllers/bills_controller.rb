@@ -23,7 +23,7 @@ class BillsController < ApplicationController
   post "/bills" do
     @bill = Bill.new(params)
     @user = Helpers.current_user(session)
-    if Helpers.is_logged_in?(session) && !@bill.content.blank? && @bill.save
+    if Helpers.is_logged_in?(session) && !@bill.bill_name.blank? && @bill.save 
         @user.bills << @bill
         redirect "/bills/#{@bill.id}"
     elsif !Helpers.is_logged_in?(session)
@@ -38,7 +38,7 @@ class BillsController < ApplicationController
     if !Helpers.is_logged_in?(session)
       redirect "/login"
     else
-      @bill = Bill.find_by_id(params[:id])
+      @bill = Bill.find(params[:id])
       erb :"/bills/show.html"
     end
   end
