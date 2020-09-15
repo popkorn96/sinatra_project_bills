@@ -42,25 +42,40 @@ class BillsController < ApplicationController
       erb :"/bills/show.html"
     end
   end
-
+#   get "/tweets/:id/edit" do
+#     @user = Helpers.current_user(session)
+#     @tweet = Tweet.find(params[:id])
+#     if !Helpers.is_logged_in?(session)
+#         redirect "/login"
+#     elsif @user.id != @tweet.user_id
+#         redirect "/login"
+#     # elsif 
+#     else 
+#         erb :"/tweets/edit_tweet"
+#     end
+# end
   # GET: /bills/5/edit
   get "/bills/:id/edit" do
+    @user = Helpers.current_user(session)
+    @bill = Bill.find(params[:id])
+    if !Helpers.is_logged_in?(session)
+      redirect "/login"
+    end
+    if @user.id != @bill.user_id
+      redirect "/login"
+    end
     erb :"/bills/edit.html"
   end
 
-#   patch "/tweets/:id" do
-#     tweet = Tweet.find(params[:id])
-#     if params[:content].empty?
-#         redirect "/tweets/#{params[:id]}/edit"
-#     end
-#     tweet.update(:content => params[:content])
-#     tweet.save
-
-#     redirect "/tweets/#{tweet.id}"
-# end
   # PATCH: /bills/5
   patch "/bills/:id" do
-    redirect "/bills/:id"
+    user = User.find(params[:id])
+    if params[:name].empty? || params[:remaining_balance].empty? || params[:amount_due].empty? || params[:due_date].empty?
+      redirect "bills/#{params[:id]}/edit"
+    end
+    bill.update(:name => params[:name], :remaining_balance => params[:name], :amount_due => params[:amount_due], :due_date => params[:due_date])
+    bill.save
+    redirect "/bills/#{params[:id]}"
   end
 
   # DELETE: /bills/5/delete
