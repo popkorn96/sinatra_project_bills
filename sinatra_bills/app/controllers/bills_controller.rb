@@ -35,25 +35,14 @@ class BillsController < ApplicationController
 
   # GET: /bills/5
   get "/bills/:id" do
-    if !Helpers.is_logged_in?(session)
-      redirect "/login"
-    else
-      @bill = Bill.find_by_id(params[:id])
+    if Helpers.is_logged_in?(session)
+      @bill = Bill.find(params[:id])
       erb :"/bills/show.html"
+    else
+      redirect "/login"
     end
   end
-#   get "/tweets/:id/edit" do
-#     @user = Helpers.current_user(session)
-#     @tweet = Tweet.find(params[:id])
-#     if !Helpers.is_logged_in?(session)
-#         redirect "/login"
-#     elsif @user.id != @tweet.user_id
-#         redirect "/login"
-#     # elsif 
-#     else 
-#         erb :"/tweets/edit_tweet"
-#     end
-# end
+
   # GET: /bills/5/edit
   get "/bills/:id/edit" do
     @user = Helpers.current_user(session)
@@ -69,7 +58,7 @@ class BillsController < ApplicationController
 
   # PATCH: /bills/5
   patch "/bills/:id" do
-    user = User.find(params[:id])
+    bill = Bill.find(params[:id])
     if params[:name].empty? || params[:remaining_balance].empty? || params[:amount_due].empty? || params[:due_date].empty?
       redirect "bills/#{params[:id]}/edit"
     end
@@ -77,16 +66,10 @@ class BillsController < ApplicationController
     bill.save
     redirect "/bills/#{params[:id]}"
   end
-
-
   # DELETE: /bills/5/delete
-  post "/bills/:id/delete" do
-    @bill = Bill.find_by_id(params[:id])
-    if Helpers.is_logged_in?(session) && @bill.user == Helper.current_user(session)
-      @bill.delete
-      redirect "/bills"
-    else 
-      redirect "/login"
-    end
+  delete "/bills/:id" do
+    @bill_to_destroy = Bill.find(params[:id])
+    @bill_to_destroy.destroy
+    redirect "/bills"
   end
 end
