@@ -1,2 +1,14 @@
-<h1>This is the show page for an individual instance of your model.</h1>
-#show a single instance of a bill
+<h2><%= @bill.name %></h2><br><br><br>
+
+<li><%= @bill.remaining_balance %></h4><br>
+<li><%= @bill.amount_due %></h4><br>
+<li><%= @bill.due_date %></h4><br>
+
+
+<a href="/bills/<%= @bill.id %>/edit"><button>Edit This Bill</button></a><br>
+
+<form method="POST" action="/bills/<%= @tweet.id %>/delete">
+  <input type="submit" value="Delete This Bill">
+</form><br>
+
+<a href="/bills"><button>Back to All Bills</button></a>

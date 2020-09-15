@@ -1,2 +1,15 @@
-<h1>This is the Model's index page.</h1>
-#show all instances of bills 
+<h2>Welcome, <%= Helpers.current_user(session).username %></h2>
+
+<% @bills.each do |tweet| %>
+  <h3> Bill: <%= bill.name %></h3>
+  <p> Remaining Balance: <%= bill.remaining_balance %></p>
+  <p> Amount Due: <%= bill.amount_due %></p>
+  <p> Due Date: <%= bill.due_date %></p>
+<% end %>
+<% else %>
+<% "/login" %>
+<% end %>
+<br><br>
+
+<a href="/bills/new"><button>New Bill</button></a>
+<a href="/logout"><button>Log Out</button></a>
