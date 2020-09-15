@@ -8,7 +8,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :welcome
+    redirect "/index"
   end
-
+  
+  get "/index" do 
+    erb :index
+  end
+  
 end
