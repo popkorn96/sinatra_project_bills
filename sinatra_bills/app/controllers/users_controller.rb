@@ -36,11 +36,16 @@ class UsersController < ApplicationController
     if !Helpers.is_logged_in?(session)
       erb :"/users/login"
     else
-      redirect "/bills"
+      redirect "/bills/index"
   end
   post "/login" do 
-    if params[:username] == "" ||params[:password] == ""
-      redirect "/signup"
+    @session = session
+    user = User.find_by(username: params[:username])
+    if user && user.authenticate(params[:password])
+      session[user_id] = user.id
+      redirect "/bills/index"
+    end
+    redirect "/signup"
   end
   # GET: /users/5
   get "/users/:id" do

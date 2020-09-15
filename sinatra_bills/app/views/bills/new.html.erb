@@ -1,2 +1,16 @@
-<h1>Insert the form to create a new instance of your model.</h1>
-#create a new bill with valid date *MMDDYYYY OR WEEKDAY, MONTH DAY YEAR
+<h2>To add a new bill, fill in the form below</h2>
+<p>You can always edit the details later :)</p>
+<form method="POST" action="/bills">
+<p>Bill Name:</p>
+<input type="text" name="bill_name" id="bill_name" placeholder="This is the name you want to give this bill"><br><br>
+<p>Email:</p>
+<input type="text" name="email" id="email"><br><br>
+<label for="password">Password:</label>
+<input type="text" name="password" id="password"><br><br>
+<input type="submit" value="Sign Up">
+</form>
+
+t.string  "bill_name"
+t.decimal "remaining_balance"
+t.decimal "amount_due"
+t.date    "due_date"
