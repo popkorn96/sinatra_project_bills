@@ -15,6 +15,13 @@ class UsersController < ApplicationController
     redirect "/users"
   end
 
+  get "/signup" do
+    erb :"/users/signup"
+  end
+
+  post "/signup" do
+    
+  end
   # GET: /users/5
   get "/users/:id" do
     erb :"/users/show.html"
