@@ -1,6 +1,6 @@
 <h2>Welcome, <%= Helpers.current_user(session).username %></h2>
 
-<% @bills.each do |tweet| %>
+<% @bills.each do |bill| %>
   <h3> Bill: <%= bill.name %></h3>
   <p> Remaining Balance: <%= bill.remaining_balance %></p>
   <p> Amount Due: <%= bill.amount_due %></p>

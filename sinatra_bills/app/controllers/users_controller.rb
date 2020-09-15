@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
       session[:user_id] = @user.id
-      redirect "/users/bills"
+      redirect "/bills/index"
     end
   end
   get "/login" do 
@@ -37,6 +37,7 @@ class UsersController < ApplicationController
       erb :"/users/login"
     else
       redirect "/bills/index"
+    end
   end
   post "/login" do 
     @session = session

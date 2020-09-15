@@ -4,8 +4,14 @@ class BillsController < ApplicationController
     set :session_secret, "secret"
   end
   # GET: /bills
-  get "/bills" do
-    erb :"/bills/index.html"
+  get "/bills" do        
+    if Helpers.is_logged_in?(session)
+      @user = Helpers.current_user(session)
+      @bills = Bills.all
+      erb :"/bills/index"
+    else
+      redirect "/login"
+    end
   end
 
   # GET: /bills/new
@@ -15,12 +21,26 @@ class BillsController < ApplicationController
 
   # POST: /bills
   post "/bills" do
-    redirect "/bills"
+    @bill = Bill.new(params)
+    @user = Helpers.current_user(session)
+    if Helpers.is_logged_in?(session) && !@bill.content.blank? && @bill.save
+        @user.bills << @bill
+        redirect "/bills/#{@bill.id}"
+    elsif !Helpers.is_logged_in?(session)
+        redirect "/login"
+    else
+        redirect "/bills/new"
+    end
   end
 
   # GET: /bills/5
   get "/bills/:id" do
-    erb :"/bills/show.html"
+    if !Helpers.is_logged_in?(session)
+      redirect "/login"
+    else
+      @bill = Bill.find_by_id(params[:id])
+      erb :"/bills/show.html"
+    end
   end
 
   # GET: /bills/5/edit
