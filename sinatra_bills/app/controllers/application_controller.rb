@@ -12,6 +12,7 @@ class ApplicationController < Sinatra::Base
   end
   
   get "/index" do 
+    @session = session
     erb :index
   end
   

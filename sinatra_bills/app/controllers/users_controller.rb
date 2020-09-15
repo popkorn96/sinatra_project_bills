@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     @session = session
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
-      session[user_id] = user.id
+      session[:user_id] = user.id
       redirect "/bills/index"
     end
     redirect "/signup"
@@ -66,4 +66,12 @@ class UsersController < ApplicationController
   # DELETE: /users/5/delete
   delete "/users/:id/delete" do
   end
+  get "/logout" do
+    if !Helpers.is_logged_in?(session)
+        redirect "/login"
+    else
+        session.clear
+        redirect "/login"
+    end
+end
 end

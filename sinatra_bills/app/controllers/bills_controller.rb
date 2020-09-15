@@ -38,7 +38,7 @@ class BillsController < ApplicationController
     if !Helpers.is_logged_in?(session)
       redirect "/login"
     else
-      @bill = Bill.find(params[:id])
+      @bill = Bill.find_by_id(params[:id])
       erb :"/bills/show.html"
     end
   end
@@ -78,8 +78,15 @@ class BillsController < ApplicationController
     redirect "/bills/#{params[:id]}"
   end
 
+
   # DELETE: /bills/5/delete
-  delete "/bills/:id/delete" do
-    redirect "/bills"
+  post "/bills/:id/delete" do
+    @bill = Bill.find_by_id(params[:id])
+    if Helpers.is_logged_in?(session) && @bill.user == Helper.current_user(session)
+      @bill.delete
+      redirect "/bills"
+    else 
+      redirect "/login"
+    end
   end
 end
