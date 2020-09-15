@@ -20,7 +20,14 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    
+    if params[:username] == "" || params[:email] =="" || params[:password] == ""
+      redirect "/signup"
+    else 
+      @user = User.new(username: params[:username], email: params[:email], password: params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect "/users/bills"
+    end
   end
   # GET: /users/5
   get "/users/:id" do
@@ -39,6 +46,5 @@ class UsersController < ApplicationController
 
   # DELETE: /users/5/delete
   delete "/users/:id/delete" do
-    redirect "/users"
   end
 end
