@@ -20,4 +20,10 @@ ActiveRecord::Schema.define(version: 20200914192702) do
     t.date    "due_date"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+  end
+
 end
