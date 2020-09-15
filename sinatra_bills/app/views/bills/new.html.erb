@@ -3,14 +3,11 @@
 <form method="POST" action="/bills">
 <p>Bill Name:</p>
 <input type="text" name="bill_name" id="bill_name" placeholder="This is the name you want to give this bill"><br><br>
-<p>Email:</p>
-<input type="text" name="email" id="email"><br><br>
-<label for="password">Password:</label>
-<input type="text" name="password" id="password"><br><br>
-<input type="submit" value="Sign Up">
+<p>Remaining Balancce:</p>
+<input type="decimal" name="remaining_balance" id="remaining_balance" placeholder="This is the total amount you owe for this bill"><br><br>
+<p>Password:</p>
+<input type="decimal" name="amount_due" id="amount_due" placeholder="This is the miminum payment due"><br><br>
+<p>Due Date:</p>
+<input type="date" name="due_date" id="due_date" placeholder="This is the date that your minimnum payment is due"><br>
+<input type="submit" value="Add Bill">
 </form>
-
-t.string  "bill_name"
-t.decimal "remaining_balance"
-t.decimal "amount_due"
-t.date    "due_date"
