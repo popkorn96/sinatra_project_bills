@@ -29,6 +29,16 @@ class UsersController < ApplicationController
       redirect "/users/bills"
     end
   end
+  get "/login" do 
+    if !Helpers.is_logged_in?(session)
+      erb :"/users/login"
+    else
+      redirect "/bills"
+  end
+  post "/login" do 
+    if params[:username] == "" ||params[:password] == ""
+      redirect "/signup"
+  end
   # GET: /users/5
   get "/users/:id" do
     erb :"/users/show.html"
