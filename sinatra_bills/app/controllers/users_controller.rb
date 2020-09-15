@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     if !Helpers.is_logged_in?(session)
       erb :"/users/login"
     else
-      redirect "/bills/index"
+      redirect "/bills"
     end
   end
   post "/login" do 

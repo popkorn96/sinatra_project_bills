@@ -7,8 +7,8 @@ class BillsController < ApplicationController
   get "/bills" do        
     if Helpers.is_logged_in?(session)
       @user = Helpers.current_user(session)
-      @bills = Bills.all
-      erb :"/bills/index"
+      @bills = Bill.all
+      erb :"/bills/index.html"
     else
       redirect "/login"
     end
@@ -23,7 +23,7 @@ class BillsController < ApplicationController
   post "/bills" do
     @bill = Bill.new(params)
     @user = Helpers.current_user(session)
-    if Helpers.is_logged_in?(session) && !@bill.bill_name.blank? && @bill.save 
+    if Helpers.is_logged_in?(session) && !@bill.name.blank? && @bill.save 
         @user.bills << @bill
         redirect "/bills/#{@bill.id}"
     elsif !Helpers.is_logged_in?(session)
@@ -48,6 +48,16 @@ class BillsController < ApplicationController
     erb :"/bills/edit.html"
   end
 
+#   patch "/tweets/:id" do
+#     tweet = Tweet.find(params[:id])
+#     if params[:content].empty?
+#         redirect "/tweets/#{params[:id]}/edit"
+#     end
+#     tweet.update(:content => params[:content])
+#     tweet.save
+
+#     redirect "/tweets/#{tweet.id}"
+# end
   # PATCH: /bills/5
   patch "/bills/:id" do
     redirect "/bills/:id"

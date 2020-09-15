@@ -2,12 +2,9 @@
 
 <% @bills.each do |bill| %>
   <h3> Bill: <%= bill.name %></h3>
-  <p> Remaining Balance: <%= bill.remaining_balance %></p>
-  <p> Amount Due: <%= bill.amount_due %></p>
+  <p> Remaining Balance: $<%= bill.remaining_balance %></p>
+  <p> Amount Due: $<%= bill.amount_due %></p>
   <p> Due Date: <%= bill.due_date %></p>
-<% end %>
-<% else %>
-<% "/login" %>
 <% end %>
 <br><br>
 
