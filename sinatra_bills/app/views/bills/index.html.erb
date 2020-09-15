@@ -1,7 +1,7 @@
 <h2>Welcome, <%= Helpers.current_user(session).username %></h2>
 
 <% @bills.each do |bill| %>
-  <h3> Bill: <%= bill.name %></h3>
+  <h3> Bill: <a href="/bills/<%= bill.id %>"><%= bill.name %></h3></a>
   <p> Remaining Balance: $<%= bill.remaining_balance %></p>
   <p> Amount Due: $<%= bill.amount_due %></p>
   <p> Due Date: <%= bill.due_date %></p>
@@ -10,3 +10,5 @@
 
 <a href="/bills/new"><button>New Bill</button></a>
 <a href="/logout"><button>Log Out</button></a>
+
+Click <a href="http://www.yahoo.com">here</a> to go to yahoo.
