@@ -1,8 +1,4 @@
 class UsersController < ApplicationController
-  configure do
-    enable :sessions
-    set :session_secret, "secret"
-  end
   # GET: /users
   get "/users" do
     erb :"/users/index.html"
@@ -23,15 +19,16 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    if params[:username] == "" || params[:email] =="" || params[:password] == ""
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect "/signup"
     else 
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
       session[:user_id] = @user.id
-      redirect "/bills/index"
+      redirect "/bills"
     end
   end
+
   get "/login" do 
     if !is_logged_in?
       erb :"/users/login"
@@ -39,12 +36,13 @@ class UsersController < ApplicationController
       redirect "/bills"
     end
   end
+
   post "/login" do 
     @session = session
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect "/bills/index"
+      redirect "/bills"
     end
     redirect "/signup"
   end

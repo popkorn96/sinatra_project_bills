@@ -1,5 +1,9 @@
-<h2>Welcome, <%= Helpers.current_user(session).username %></h2>
-
+<h2>Welcome, <%= current_user.username %></h2>
+<% if @bills.empty?%>
+<h3> You currently don't have any bills <h3><br>
+<p>Click <a href="/bills/new">here</a> to add a new bill</p>
+<a href="/logout"><button>Log Out</button></a>
+<% else %>
 <% @bills.each do |bill| %>
   <h3> Bill: <a href="/bills/<%= bill.id %>"><%= bill.name %></h3></a>
   <p> Remaining Balance: $<%= bill.remaining_balance %></p>
@@ -10,5 +14,4 @@
 
 <a href="/bills/new"><button>New Bill</button></a>
 <a href="/logout"><button>Log Out</button></a>
-
-Click <a href="http://www.yahoo.com">here</a> to go to yahoo.
+<% end %>
