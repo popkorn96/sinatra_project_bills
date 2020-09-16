@@ -1,5 +1,5 @@
 <h2>To add a new bill, fill in the form below</h2>
-<p>You can always edit the details later :)</p>
+<p><i>You can always edit the details later :)</i></p>
 
 
 <form method="POST" action="/bills">
@@ -14,6 +14,17 @@
 
 <p>Due Date:</p>
 <input type="date" name="due_date" id="due_date" placeholder="This is the date that your minimnum payment is due"><br><br>
+
+<p>Type of Bill:</p>
+  <input type="radio" name="category" id="housing" value="Housing">  Housing</input><br>
+  <input type="radio" name="category" id="utilities" value="Utilities">  Utilities</input><br>
+  <input type="radio" name="category" id="private_loan" value="Private Loan">  Private Loan</input><br>
+  <input type="radio" name="category" id="irs_debt" value="IRS Debt">  IRS Debt</input><br>
+  <input type="radio" name="category" id="medical" value="Medical">  Medical</input><br>
+  <input type="radio" name="category" id="credit_card" value="Credit Card">  Credit Card</input><br>
+  <input type="radio" name="category" id="child_support" value="Child Support">  Child Support</input><br>
+  <input type="radio" name="category" id="other" value="Other">  Other</input>
+<br><br><br>
 
 <input type="submit" value=" Add Bill ">
 <a href="/bills"><button>View All Bills</button></a>

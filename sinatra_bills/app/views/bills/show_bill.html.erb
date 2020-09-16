@@ -2,7 +2,8 @@
 <ul>
 <li>Remaining Balance: $<%= @bill.remaining_balance %></h4><br><br>
 <li>Amount Due: $<%= @bill.amount_due %></h4><br><br>
-<li>Due Date: <%= @bill.due_date %></h4><br><br><br>
+<li>Due Date: <%= @bill.due_date %></h4><br><br>
+<li> Category: <%= @bill.category %></h4><br><br><br>
 </ul>
 
 <form action="/bills/<%=@bill.id%>/delete" method="post">

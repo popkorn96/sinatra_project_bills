@@ -60,7 +60,7 @@ class BillsController < ApplicationController
     if params[:name].empty? || params[:remaining_balance].empty? || params[:amount_due].empty? || params[:due_date].empty?
       redirect "bills/#{params[:id]}/edit"
     end
-    bill.update(:name => params[:name], :remaining_balance => params[:remaining_balance], :amount_due => params[:amount_due], :due_date => params[:due_date])
+    bill.update(:name => params[:name], :remaining_balance => params[:remaining_balance], :amount_due => params[:amount_due], :due_date => params[:due_date], :category => params[:category])
     bill.save
     redirect "/bills/#{params[:id]}"
   end
