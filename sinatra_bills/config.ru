@@ -5,6 +5,8 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
+use DatesController
 use BillsController
 use UsersController
 run ApplicationController
+use DatEsController

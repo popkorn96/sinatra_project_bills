@@ -1,8 +1,9 @@
 <h2>Welcome, <%= current_user.username %></h2>
-<% if @bills.empty?%>
-<h3> You currently don't have any bills <h3><br>
+<% if @bills.empty? %>
+<h4><i>You currently don't have any bills... </i><h4><br>
 <p>Click <a href="/bills/new">here</a> to add a new bill</p>
-<a href="/logout"><button>Log Out</button></a>
+<a href="/logout"><button> Log Out </button></a>
+
 <% else %>
 <% @bills.each do |bill| %>
   <h3> Bill: <a href="/bills/<%= bill.id %>"><%= bill.name %></h3></a>

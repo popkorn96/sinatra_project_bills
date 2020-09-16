@@ -14,11 +14,12 @@ class BillsController < ApplicationController
   end
 
   get "/bills/new" do
-    if is_logged_in?
+    if !is_logged_in?
+      redirect "/login"
+    else 
       @user = current_user
       erb :"/bills/new.html"
     end
-    redirect "/login"
   end
 
   post "/bills" do
@@ -27,7 +28,7 @@ class BillsController < ApplicationController
     if is_logged_in? && @bill.save
         @user.bills << @bill
         redirect "/bills/#{@bill.id}"
-    else !is_logged_in?
+    else
         redirect "/login"
     end
     redirect "/bills/new.html"
@@ -59,7 +60,7 @@ class BillsController < ApplicationController
     if params[:name].empty? || params[:remaining_balance].empty? || params[:amount_due].empty? || params[:due_date].empty?
       redirect "bills/#{params[:id]}/edit"
     end
-    bill.update(:name => params[:name], :remaining_balance => params[:name], :amount_due => params[:amount_due], :due_date => params[:due_date])
+    bill.update(:name => params[:name], :remaining_balance => params[:remaining_balance], :amount_due => params[:amount_due], :due_date => params[:due_date])
     bill.save
     redirect "/bills/#{params[:id]}"
   end
@@ -68,7 +69,7 @@ class BillsController < ApplicationController
     @bill = Bill.find_by_id(params[:id])
     if is_logged_in? && current_user.bills.include?(@bill)
       @bill.destroy
-      redirect "/users/#{current_user.id}"
+      redirect "/bills"
     else
       redirect "/bills/#{@bill.id}"
     end
