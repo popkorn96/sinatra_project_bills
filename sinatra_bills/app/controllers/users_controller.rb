@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     end
   end
   get "/login" do 
-    if !Helpers.is_logged_in?(session)
+    if !is_logged_in?
       erb :"/users/login"
     else
       redirect "/bills"
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
   delete "/users/:id/delete" do
   end
   get "/logout" do
-    if !Helpers.is_logged_in?(session)
+    if !is_logged_in?
         redirect "/login"
     else
         session.clear

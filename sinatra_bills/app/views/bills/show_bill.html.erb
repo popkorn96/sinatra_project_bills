@@ -7,8 +7,8 @@
 
 <a href="/bills/<%= @bill.id %>/edit"><button>Edit This Bill</button></a><br>
 
-<form action="/bills/<%=@bill.id %>" method="post">
-  <input type="hidden" id="hidden" name="_method" value="delete">
+<form action="/bills/<%=@bill.id%>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete This Bill">
 </form><br>
 

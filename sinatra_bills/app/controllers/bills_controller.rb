@@ -1,12 +1,20 @@
 class BillsController < ApplicationController
   configure do
     enable :sessions
-    set :session_secret, "secret"
+    set :session_secret, "password_security"
   end
-  # GET: /bills
+
+  get "/bills/new" do
+    if is_logged_in?
+      @user = current_user
+      erb :"/bills/new.html"
+    end
+    redirect "/login"
+  end
+
   get "/bills" do        
-    if Helpers.is_logged_in?(session)
-      @user = Helpers.current_user(session)
+    if is_logged_in?
+      @user = current_user
       @bills = Bill.all
       erb :"/bills/index.html"
     else
@@ -14,30 +22,26 @@ class BillsController < ApplicationController
     end
   end
 
-  # GET: /bills/new
-  get "/bills/new" do
-    erb :"/bills/new.html"
-  end
-
-  # POST: /bills
   post "/bills" do
     @bill = Bill.new(params)
-    @user = Helpers.current_user(session)
-    if Helpers.is_logged_in?(session) && !@bill.name.blank? && @bill.save 
+    @user = current_user
+    if is_logged_in? && @bill.save 
         @user.bills << @bill
         redirect "/bills/#{@bill.id}"
-    elsif !Helpers.is_logged_in?(session)
+    else !is_logged_in?
         redirect "/login"
-    else
-        redirect "/bills/new"
     end
+    redirect "/bills/new.html"
   end
-
   # GET: /bills/5
   get "/bills/:id" do
-    if Helpers.is_logged_in?(session)
-      @bill = Bill.find(params[:id])
-      erb :"/bills/show.html"
+    @bill = Bill.find_by_id(params[:id])
+    @bill.name = params[:name]
+    @bill.remaining_balance = params[:remaining_balance]
+    @bill.amount_due = params[:amount_due]
+    @bill.due_date = params[:due_date]
+    if is_logged_in?
+      erb :"/bills/show_bill.html"
     else
       redirect "/login"
     end
@@ -45,9 +49,9 @@ class BillsController < ApplicationController
 
   # GET: /bills/5/edit
   get "/bills/:id/edit" do
-    @user = Helpers.current_user(session)
+    @user = current_user
     @bill = Bill.find(params[:id])
-    if !Helpers.is_logged_in?(session)
+    if !is_logged_in?
       redirect "/login"
     end
     if @user.id != @bill.user_id
@@ -67,9 +71,13 @@ class BillsController < ApplicationController
     redirect "/bills/#{params[:id]}"
   end
   # DELETE: /bills/5/delete
-  delete "/bills/:id" do
-    @bill_to_destroy = Bill.find(params[:id])
-    @bill_to_destroy.destroy
-    redirect "/bills"
+  delete "/bills/:id/delete" do
+    @bill = Bill.find_by_id(params[:id])
+    if is_logged_in? && current_user.bills.include?(@bill)
+      @bill.destroy
+      redirect "/users/#{current_user.id}"
+    else
+      redirect "/bills/#{@bill.id}"
+    end
   end
 end
