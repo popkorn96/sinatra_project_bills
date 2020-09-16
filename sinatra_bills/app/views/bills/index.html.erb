@@ -9,7 +9,7 @@
   <h3> Bill: <a href="/bills/<%= bill.id %>"><%= bill.name %></h3></a>
   <p> Remaining Balance: $<%= bill.remaining_balance %></p>
   <p> Amount Due: $<%= bill.amount_due %></p>
-  <p> Due Date: <%= bill.due_date %></p>
+  <p> Due Date: <%= bill.due_date.strftime("%A, %b. %-d, %Y") %></p>
 <% end %>
 <br><br>
 

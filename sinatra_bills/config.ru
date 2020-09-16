@@ -8,4 +8,3 @@ use Rack::MethodOverride
 use BillsController
 use UsersController
 run ApplicationController
-use DatEsController
