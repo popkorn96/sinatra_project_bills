@@ -35,8 +35,11 @@ class BillsController < ApplicationController
   end
 
   get "/bills/:id" do
+    @user = current_user
     @bill = Bill.find(params[:id])
-    if is_logged_in?
+    if @user.id != @bill.user_id
+      redirect "/login"
+    elsif is_logged_in?
       erb :"/bills/show_bill.html"
     else
       redirect "/login"

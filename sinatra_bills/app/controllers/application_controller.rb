@@ -14,7 +14,9 @@ class ApplicationController < Sinatra::Base
   get "/" do
     redirect "/index"
   end
-  
+  get "/welcome" do 
+    erb :welcome
+  end
   get "/index" do 
     @session = session
     erb :index
@@ -27,5 +29,8 @@ class ApplicationController < Sinatra::Base
       !!current_user
     end
   end
-  
+  get "/about" do
+    erb :about_bills_app
+  end
+
 end

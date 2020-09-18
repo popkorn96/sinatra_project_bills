@@ -19,10 +19,10 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+    if params[:username] == "" || params[:password] == ""
       redirect "/signup"
     else 
-      @user = User.new(username: params[:username], email: params[:email], password: params[:password])
+      @user = User.new(username: params[:username], password: params[:password])
       @user.save
       session[:user_id] = @user.id
       redirect "/bills"
@@ -44,12 +44,22 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/bills"
     end
-    redirect "/signup"
+    redirect "/login"
   end
   # GET: /users/5
   get "/users/:id" do
-    erb :"/users/show.html"
   end
+
+  get "/user/:id/calendar" do
+    @bills = current_user.bills
+    if is_logged_in?
+      @user = current_user
+      erb :"bills/calendar"
+    else
+      redirect "/login"
+    end
+  end
+
 
   # GET: /users/5/edit
   get "/users/:id/edit" do
