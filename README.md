@@ -1,8 +1,6 @@
 # SinatraProjectBills
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/Sinatra_Project_Bills`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to the Bills App! This app is designed to be able to help users organize their bills. They are able to build their bills with a name, remaining balance, amount due, due date and category.  Categories include housing, credit cards, medical and more. There is also a calendar feature that users can use as reference when planning their upcoming payments. 
 
 ## Installation
 
@@ -20,9 +18,6 @@ Or install it yourself as:
 
     $ gem install Sinatra_Project_Bills
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
