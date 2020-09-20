@@ -11,11 +11,11 @@
 
     /* Set width length for the left, right and middle columns */
     .left {
-    width: 15%;
+    width: 20%;
     }
 
     .right {
-    width: 85%;
+    width: 80%;
     }
     
     .row:after {
@@ -31,27 +31,28 @@
        <h2>Menu:</h2>
             <p><a href="/bills">  All Bills</a><br><br>
             <a href="/bills/new">  New Bill</a><br><br>
-            <a href="/user/<%= current_user.id %>/calendar">  Calendar</a><br><br><br>
+            <a href="/user/<%= current_user.id %>/calendar">  2020/2021 Calendar</a><br><br><br>
             <a href="/logout">  Log Out</a><br><br>
             </ul></p>
        </div>
        <div class="column right" style="background-color:#FFFFFF;">
-       <h2>To add a new bill, fill in the form below</h2>
-<p><i>You can always edit the details later :)</i></p>
+       <h2>New Bill</h2>
+       <h4>To add a new bill, fill in the form below</h4>
+<p><i>You can always edit the details later :)</i></p><br><br>
 
 
 <form method="POST" action="/bills">
 <p>Bill Name:</p>
-<input type="text" name="name" id="name" placeholder="This is the name you want to give this bill"><br><br>
+<input type="text" name="name" id="name" placeholder="Name of new bill ..."><br><br>
 
 <p>Remaining Balance:</p>
-<input type="decimal"name="remaining_balance" id="remaining_balance" placeholder="This is the total amount you owe for this bill"><br><br>
+<input type="decimal"name="remaining_balance" id="remaining_balance" placeholder="Total amount due ..."><br><br>
 
 <p>Amount Due:</p>
-<input type="decimal" name="amount_due" id="amount_due" placeholder="This is the miminum payment due"><br><br>
+<input type="decimal" name="amount_due" id="amount_due" placeholder="Minimum payment due ..."><br><br>
 
 <p>Due Date:</p>
-<input type="date" name="due_date" id="due_date" placeholder="This is the date that your minimnum payment is due"><br><br>
+<input type="date" name="due_date" id="due_date" placeholder="Upcoming due date ..."><br><br>
 
 <p>Type of Bill:</p>
   <input type="radio" name="category" id="housing" value="Housing">  Housing</input><br>
