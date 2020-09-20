@@ -1,6 +1,6 @@
 # SinatraProjectBills
 
-This app is designed to be able to help users organize their bills. They are able to build their bills with a name, remaining balance, amount due, due date and category.  Categories include housing, credit cards, medical and more. There is also a calendar feature that users can use as reference when planning their upcoming payments. 
+Welcome to the Bills App! This app is designed to be able to help users organize their bills. They are able to build their bills with a name, remaining balance, amount due, due date and category.  Categories include housing, credit cards, medical and more. There is also a calendar feature that users can use as reference when planning their upcoming payments. 
 
 ## Installation
 
