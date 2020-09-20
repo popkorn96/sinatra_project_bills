@@ -20,10 +20,12 @@ Specs:
 - [x] Include user input validations
 -- User model has secure password validation and validates_presence_of are active and working 
 - [ ] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+-- My README.md includes the desctiption and install instructions as well as a contributors guide and a link to the license
 
 Confirm
 - [x] You have a large number of small Git commits
 - [x] Your commit messages are meaningful
 - [x] You made the changes in a commit that relate to the commit message
-- [ ] You don't include changes in a commit that aren't related to the commit message
+- [-] You don't include changes in a commit that aren't related to the commit message
+-- I did include some commits that aren't related to the commit message due to prolonged editing without committing 
